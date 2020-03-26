@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: npm install
+      run: npm install
+
+    - name: Package
+      run: npx pkg node_modules/svgo
+      
+    - uses: actions/upload-artifact@v1
+      with:
+        name: svgo-macos
+        path: svgo-macos
+
+    - uses: actions/upload-artifact@v1
+      with:
+        name: svgo-linux
+        path: svgo-linux
+
+    - uses: actions/upload-artifact@v1
+      with:
+        name: svgo-win.exe
+        path: svgo-win.exe
