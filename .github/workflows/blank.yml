@@ -23,13 +23,13 @@ jobs:
       run: npx pkg node_modules/svgo
 
     - name: Create JSON
-      run: jo -p version=$(./svgo-macos -v) \
-           mac_sha256=$(sha256sum ./svgo-macos | head -c 64) \
-           mac_size=$(wc -c < ./svgo-macos | xargs) \
-           linux_sha256=$(sha256sum ./svgo-linux | head -c 64) \
-           linux_size=$(wc -c < ./svgo-linux | xargs) \
-           windows_sha256=$(sha256sum svgo-win.exe | head -c 64) \
-           windows_size=$(wc -c < ./svgo-win.exe | xargs)
+      run: jo -p version=$(./svgo-linux -v) \
+          mac_sha256=$(sha256sum ./svgo-macos | head -c 64) \
+          mac_size=$(wc -c < ./svgo-macos | xargs) \
+          linux_sha256=$(sha256sum ./svgo-linux | head -c 64) \
+          linux_size=$(wc -c < ./svgo-linux | xargs) \
+          windows_sha256=$(sha256sum svgo-win.exe | head -c 64) \
+          windows_size=$(wc -c < ./svgo-win.exe | xargs)
       
     - uses: actions/upload-artifact@v1
       with:
